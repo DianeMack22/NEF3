@@ -1,0 +1,67 @@
+name: NEF Mapping Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run-nef-mapping:
+    runs-on: ubuntu-latest
+
+    steps:
+      # -------------------------
+      # Checkout repository
+      # -------------------------
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # -------------------------
+      # Set up conda environment
+      # -------------------------
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          use-mamba: true
+          activate-environment: nef-mapping
+          environment-file: environment.yaml
+
+      # -------------------------
+      # Verify environment
+      # -------------------------
+      - name: Check Python version
+        shell: bash -l {0}
+        run: python --version
+
+      # -------------------------
+      # Download shapefile
+      # -------------------------
+      - name: Download ZCTA shapefile
+        run: |
+          curl -L "https://www2.census.gov/geo/tiger/TIGER2022/ZCTA520/tl_2022_us_zcta520.zip" -o tl_2022_us_zcta520.zip
+          unzip tl_2022_us_zcta520.zip
+          
+      # -------------------------
+      # Run NEF mapping scripts
+      # Update filenames below
+      # -------------------------
+      - name: Run ACS fetch + map scripts
+        shell: bash -l {0}
+        run: |
+          echo "Running NEF analysis..."
+          python fetch_acs_data.py
+          python create_maps.py
+
+      # -------------------------
+      # Upload map output artifacts
+      # Add any PNGs you want uploaded
+      # -------------------------
+      - name: Upload generated maps
+        uses: actions/upload-artifact@v4
+        with:
+          name: nef-maps
+          path: |
+            *.png
+            output/*.png
