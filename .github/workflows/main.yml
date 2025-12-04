@@ -49,7 +49,7 @@ jobs:
         shell: bash -l {0}
         run: |
           echo "Running NEF analysis..."
-          python nef_project_v_3.py
+          python NEF_project_v_3.py
 
       # -------------------------
       # Upload map output artifacts
