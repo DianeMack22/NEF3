@@ -1,10 +1,10 @@
 name: NEF Mapping Pipeline
 
+
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:  # allows you to run it manually from the Actions tab
 
 jobs:
   run-nef-mapping:
