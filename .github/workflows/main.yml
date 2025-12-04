@@ -49,8 +49,7 @@ jobs:
         shell: bash -l {0}
         run: |
           echo "Running NEF analysis..."
-          python fetch_acs_data.py
-          python create_maps.py
+          python nef_project_v_3.py
 
       # -------------------------
       # Upload map output artifacts
@@ -58,7 +57,7 @@ jobs:
       - name: Upload generated maps
         uses: actions/upload-artifact@v4
         with:
-          name: nef-maps
+          name: nef-maps-v-3
           path: |
             *.png
             output/*.png
