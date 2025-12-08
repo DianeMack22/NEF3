@@ -38,8 +38,8 @@ jobs:
       # -------------------------
       - name: Download ZCTA shapefile
         run: |
-          curl -L "https://www2.census.gov/geo/tiger/TIGER2022/ZCTA520/tl_2022_us_zcta520.zip" -o tl_2022_us_zcta520.zip
-          unzip tl_2022_us_zcta520.zip
+          curl -L "https://www2.census.gov/geo/tiger/TIGER2022/ZCTA520/tl_2023_us_zcta520.zip" -o tl_2022_us_zcta520.zip
+          unzip tl_2023_us_zcta520.zip
           
       # -------------------------
       # Run NEF mapping scripts
@@ -49,7 +49,7 @@ jobs:
         shell: bash -l {0}
         run: |
           echo "Running NEF analysis..."
-          python NEF_project_v_3.py
+          python NEF_project_v_5.py
 
       # -------------------------
       # Upload map output artifacts
@@ -57,7 +57,7 @@ jobs:
       - name: Upload generated maps
         uses: actions/upload-artifact@v4
         with:
-          name: nef-maps-v-3
+          name: nef-maps-v-5
           path: |
             *.png
             output/*.png
