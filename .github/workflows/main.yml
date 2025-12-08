@@ -38,7 +38,7 @@ jobs:
       # -------------------------
       - name: Download ZCTA shapefile
         run: |
-          curl -L "https://www2.census.gov/geo/tiger/TIGER2023/ZCTA520/tl_2023_us_zcta520.zip" -o tl_2022_us_zcta520.zip
+          curl -L "https://www2.census.gov/geo/tiger/TIGER2023/ZCTA520/tl_2023_us_zcta520.zip" -o tl_2023_us_zcta520.zip
           unzip tl_2023_us_zcta520.zip
           
       # -------------------------
