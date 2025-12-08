@@ -32,15 +32,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pandas geopandas matplotlib requests
-
-      # -------------------------
-      # Download shapefile
-      # -------------------------
-      - name: Download ZCTA shapefile
-        run: |
-          curl -L "https://www2.census.gov/geo/tiger/TIGER2023/ZCTA520/tl_2023_us_zcta520.zip" -o tl_2023_us_zcta520.zip
-          unzip tl_2023_us_zcta520.zip
-          
+       
       # -------------------------
       # Run NEF mapping scripts
       # Update filenames below
