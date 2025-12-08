@@ -1,21 +1,15 @@
-Input files in the project folder:
+Inputs: The only required file outside of the .py file is the NEF_loans.csv file. 
 
-    nef_loans.csv
-    acs_poverty_income.csv
-    acs_population_area.csv
-    tl_2022_us_zcta520.shp (plus shapefile components) (included in the acs_population_area.csv code)
+NEF Mapping Pipeline (v5)
 
-Outputs:
+This project generates county-level maps showing how NEF lending aligns with economic need across Iowa, Nebraska, and South Dakota. The script integrates NEF loan data, ACS poverty and population data, and TIGER/Line shapefiles to identify high-poverty or low-population rural counties and visualize where NEF lending is occurring.
 
-Map: poverty + per-capita lending
-     Darker red = higher poverty.
-     Bigger blue circles = more loans per 1,000 residents.
-     You can visually say: “Do big circles tend to be in darker red places?”
+The pipeline:
+Fetches ACS data and downloads required shapefiles
+Builds a ZCTA → County crosswalk
+Aggregates loan counts to counties
+Creates two maps:
+     Story Categories Map
+     Poverty + Lending Intensity Map
 
-Scatterplots:
-Poverty rate vs loans_per_1k_pop
-     Upward pattern → NEF lends more intensely in higher-poverty areas.
-Median income vs loans_per_1k_pop
-     Downward pattern → NEF concentrates more in lower-income areas.
-Population density vs loans_per_1k_pop
-     Shape tells you if you’re more active in urban or rural contexts.
+A GitHub Actions workflow automates execution and uploads the resulting PNG map files.
