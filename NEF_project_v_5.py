@@ -56,11 +56,11 @@ def download_and_extract_zip(url: str, shp_name: str, extract_path: str = "."):
         for chunk in response.iter_content(chunk_size=8192):
             f.write(chunk)
 
-    os.remove(zip_filename)
     print(f"Extracting {zip_filename}...")
     with zipfile.ZipFile(zip_filename, "r") as zip_ref:
         zip_ref.extractall(extract_path)
 
+    os.remove(zip_filename)
     print(f"{shp_name} ready.")
 
 
